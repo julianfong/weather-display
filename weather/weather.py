@@ -12,7 +12,8 @@ secrets = os.path.join(os.path.dirname(os.path.realpath(__file__)), 'secrets.ini
 
 import style
 
-BASE_WEATHER_API_URL = "https://api.openweathermap.org/data/2.5/onecall"
+# BASE_WEATHER_API_URL = "https://api.openweathermap.org/data/2.5/onecall"
+BASE_WEATHER_API_URL = "https://api.openweathermap.org/data/2.5/forecast"
 BASE_GEOCODING_API_URL = "http://api.openweathermap.org/geo/1.0/direct"
 
 # &exclude=hourly,daily
@@ -117,6 +118,8 @@ def get_api_data(query_url):
     Returns:
         dict: Weather information for a specific city
     """
+    print(query_url)
+
     try:
         response = request.urlopen(query_url)
     except error.HTTPError as http_error:

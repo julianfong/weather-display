@@ -1,5 +1,8 @@
 # main.py
-import eink
+DEBUG_WITHOUT_EINK = True
+
+if not DEBUG_WITHOUT_EINK:
+    import eink
 import weather
 import chart
 from PIL import Image
@@ -13,7 +16,7 @@ tmpdir = os.path.join(os.path.dirname(os.path.realpath(__file__)), 'temp_image')
 # 0 0 * * * /usr/bin/python3 /home/pi/PycharmProjects/weather/main.py
 
 if __name__ == '__main__':
-    city = ["vancouver"]
+    city = ["vancouver,ca"]
 
     logging.info("get weather for city")
     # city_latlog = weather.get_latlon_data(["cambridge"])
@@ -36,4 +39,5 @@ if __name__ == '__main__':
     chart.combine_for_display()
 
     # eink.clear()
-    eink.show(eink.convert_color(tmpdir + '/weather_combined.png'))
+    if not DEBUG_WITHOUT_EINK:
+        eink.show(eink.convert_color(tmpdir + '/weather_combined.png'))
